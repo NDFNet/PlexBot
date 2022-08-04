@@ -22,7 +22,7 @@ log.info(f"Logged into Plex as {plex.myPlexUsername}")
 intents = nextcord.Intents.default()
 intents.message_content = True
 intents.members = True
-bot = commands.Bot(command_prefix='!', intents=intents, owner_ids=config["owner_ids"], description='A basic music bot to play music from Plex servers.')
+bot = commands.Bot(command_prefix=config["prefix"], intents=intents, owner_ids=config["owner_ids"], description='A basic music bot to play music from Plex servers.')
 
 @bot.event
 async def on_ready():
@@ -41,7 +41,7 @@ class PlexBotEmoji:
 
 class random_footer:
     def __init__(self):
-        num = random.randint(0, 7)
+        num = random.randint(0, 10)
         match num:
             case 0:
                 self.text = "An agpwat moment has occurred!"
@@ -67,6 +67,18 @@ class random_footer:
             case 7:
                 self.text = "A billgates moment has occurred!"
                 self.image = "https://cdn.discordapp.com/emojis/844399371742609438.png"
+            case 8:
+                self.text = "A magikkek moment has occurred!"
+                self.image = "https://cdn.discordapp.com/emojis/881959153977942017.gif"
+            case 9:
+                self.text = "A kek moment has occurred!"
+                self.image = "https://cdn.discordapp.com/emojis/859461499247919104.png"
+            case 10:
+                self.text = "A rafficlose moment has occurred!"
+                self.image = "https://cdn.discordapp.com/emojis/849364281454755890.png"
+            case 11:
+                self.text = "A gillbates moment has occurred!"
+                self.image = "https://cdn.discordapp.com/emojis/963406960651300864.png"
 
 class UserChecks:
     async def do_vc_check(ctx: commands.Context):
@@ -121,7 +133,7 @@ class UserChecks:
             msg = await ctx.reply(embed=embed)
             vc = await ctx.author.voice.channel.connect()
             embed.title="{} I am now in the voice channel:".format(PlexBotEmoji.billgates())
-            embed.description=bot.get_channel(vc.channel).mention
+            embed.description=ctx.author.voice.channel.mention
             embed.color=nextcord.Color.green()
             await msg.edit(embed=embed)
 
@@ -168,10 +180,26 @@ class Main(commands.Cog):
             embed.set_footer(text=footer.text, icon_url=footer.image)
             await ctx.reply(embed=embed)
 
+class Media(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+
+    @commands.command(brief="Plays the requested song idk", usage="[title]")
+    async def play(self, ctx: commands.Context, *, arg):
+        await UserChecks.do_blacklist_check(ctx)
+        await UserChecks.do_vc_check(ctx)
+        await UserChecks.do_bot_in_vc_check(ctx)
+        await UserChecks.do_same_vc_check(ctx)
+        tracks = plex.search(arg, mediatype='track', limit=10)
+        track: Track = tracks[0]
+        await ctx.reply(track.title)
+        print(track.getStreamURL())
+        vc.play(nextcord.FFmpegOpusAudio(track.getStreamURL()))
 
 
 
 bot.add_cog(Main(bot)); log.info('Registered cog "Main"')
+bot.add_cog(Media(bot)); log.info('Registered cog "Media"')
 # bot.add_cog(Queueing(bot)); log.info('Registered cog "Queueing"')
 # bot.add_cog(Controls(bot)); log.info('Registered cog "Controls"')
 

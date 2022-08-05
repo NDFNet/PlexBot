@@ -191,7 +191,8 @@ class Media(commands.Cog):
         await UserChecks.do_bot_in_vc_check(ctx)
         await UserChecks.do_same_vc_check(ctx)
         tracks = plex.search(arg, mediatype='track', limit=10)
-        track: Track = tracks[0]
+        try: track: Track = tracks[0]
+        except IndexError: await ctx.reply(f"No results for \"{arg}\""); return
         await ctx.reply(track.title)
         print(track.getStreamURL())
         vc.play(nextcord.FFmpegOpusAudio(track.getStreamURL()))

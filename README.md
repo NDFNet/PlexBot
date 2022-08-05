@@ -2,7 +2,6 @@
 A basic bot to play music from the configured Plex server in a Discord voice channel.
 
 ## Setup
-
 1. Clone the repo
 ```bash
 git clone https://github.com/NDFNet/PlexBot.git
@@ -11,8 +10,12 @@ git clone https://github.com/NDFNet/PlexBot.git
 ```bash
 cd PlexBot
 ```
-3. Fill out config.example.json and rename to config.json
-4. Run bot
+3. Install required libraries
+```bash
+pip install -r requirements.txt
+```
+4. Fill out config.example.json and rename to config.json
+5. Run bot
 ```bash
 python main.py
 ```

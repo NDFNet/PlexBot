@@ -4,3 +4,7 @@ dkay/
 floppy/
 logs/
 __pycache__/
+venv/
+Pipfile
+*.lock
+.idea/

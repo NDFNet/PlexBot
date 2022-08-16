@@ -19,7 +19,7 @@ log.info(f"Starting PlexBot {VERSION}")
 config = json.loads(pathlib.Path("config.json").read_text())
 plex: PlexServer = PlexServer(config["plex_baseurl"], config['plex_token'])
 musicLib = plex.library.section('Music')
-log.info(f"Logged into Plex as {plex.myPlexUsername}")
+log.info(f"Logged into {plex.friendlyName} as {plex.myPlexUsername}")
 intents = nextcord.Intents.default()
 intents.message_content = True
 intents.members = True
@@ -193,7 +193,8 @@ class Media(commands.Cog):
         tracks = musicLib.searchTracks(title=arg, maxresults=10)
         try: track: Track = tracks[0]
         except IndexError: await ctx.reply(f"No results for \"{arg}\""); return
-        await ctx.reply(track.title)
+        log.info(f"{ctx.author.name} queued \"{track.title}\"")
+        await ctx.reply(f"Now Playing: {track.title}")
         print(track.getStreamURL())
         vc.play(nextcord.FFmpegOpusAudio(track.getStreamURL()))
 

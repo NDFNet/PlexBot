@@ -1,3 +1,4 @@
 plexapi
-nextcord
-pysimplelog
+logging
+py-cord
+pynacl

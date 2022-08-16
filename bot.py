@@ -18,6 +18,7 @@ log.info(f"Starting PlexBot {VERSION}")
 
 config = json.loads(pathlib.Path("config.json").read_text())
 plex: PlexServer = PlexServer(config["plex_baseurl"], config['plex_token'])
+musicLib = plex.library.section('Music')
 log.info(f"Logged into Plex as {plex.myPlexUsername}")
 intents = nextcord.Intents.default()
 intents.message_content = True
@@ -137,7 +138,6 @@ class UserChecks:
             embed.color=nextcord.Color.green()
             await msg.edit(embed=embed)
 
-
 class Main(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -190,7 +190,7 @@ class Media(commands.Cog):
         await UserChecks.do_vc_check(ctx)
         await UserChecks.do_bot_in_vc_check(ctx)
         await UserChecks.do_same_vc_check(ctx)
-        tracks = plex.search(arg, mediatype='track', limit=10)
+        tracks = musicLib.searchTracks(title=arg, maxresults=10)
         try: track: Track = tracks[0]
         except IndexError: await ctx.reply(f"No results for \"{arg}\""); return
         await ctx.reply(track.title)

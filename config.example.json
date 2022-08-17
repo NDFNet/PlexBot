@@ -1,8 +1,10 @@
 {
-    "discord_token": "",
-    "prefix": "!",
-    "plex_token": "",
-    "plex_baseurl": "",
-    "owner_ids": [],
-    "blacklist": []
+    "discord": {
+        "token": "TOKEN",
+        "prefix": "!"
+    },
+    "plex": {
+        "token": "TOKEN",
+        "url": "http://example.com:32400"
+    }
 }

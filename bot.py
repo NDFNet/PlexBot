@@ -5,6 +5,7 @@ from plexapi.server import PlexServer
 
 from PlexBot.config import discord_prefix, discord_token, config
 from PlexBot.logging import log
+from PlexBot.plex import plex
 # Init
 VERSION = "DEV-0.1.0"
 
@@ -14,6 +15,7 @@ log.info(f"Starting PlexBot {VERSION}")
 intents = nextcord.Intents.all()
 bot = commands.Bot(command_prefix=discord_prefix, intents=intents)
 bot.load_extension("cogs.main")
+bot.load_extension("cogs.media")
 
 @bot.event
 async def on_ready():

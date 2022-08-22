@@ -1,3 +1,4 @@
-from pysimplelog import Logger
-log = Logger("PlexBot")
-log.set_log_file_basename("logs/plexbot")
+import coloredlogs, logging
+log = logging.getLogger(__name__)
+coloredlogs.install(level='INFO')
+logging.getLogger("nextcord.gateway").setLevel(logging.WARNING)

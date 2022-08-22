@@ -1,3 +1,5 @@
 plexapi
 nextcord
-pysimplelog
+coloredlogs
+colorama
+pynacl

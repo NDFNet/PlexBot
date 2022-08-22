@@ -1,7 +1,12 @@
 {
+    "bot": {
+        "debug": false
+    },
     "discord": {
         "token": "TOKEN",
-        "prefix": "!"
+        "prefix": "!",
+        "owners": [],
+        "blacklist": []
     },
     "plex": {
         "token": "TOKEN",

@@ -1,4 +1,6 @@
 import coloredlogs, logging
+from PlexBot import config
 log = logging.getLogger(__name__)
 coloredlogs.install(level='INFO')
-logging.getLogger("nextcord.gateway").setLevel(logging.WARNING)
+if not config.config["bot"]["debug"]:
+    logging.getLogger("nextcord.gateway").setLevel(logging.WARNING)

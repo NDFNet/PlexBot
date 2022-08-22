@@ -1,4 +1,5 @@
 from PlexBot.config import blacklist
+from PlexBot.exceptions import UserOnBlacklist, UserNotInSameVC, UserNotInVC
 import nextcord
 from nextcord.ext import commands
 
@@ -17,7 +18,7 @@ class UserChecks:
                 embed.color = nextcord.Color.yellow()
             # TODO: random footer
             await ctx.reply(embed=embed)
-            raise Exception("user not in vc")
+            raise UserNotInVC()
     
     async def do_same_vc_check(ctx: commands.Context):
         if ctx.voice_client is None: return
@@ -29,7 +30,7 @@ class UserChecks:
             )
             # TODO: random footer
             await ctx.reply(embed=embed)
-            raise Exception("user not in same vc")
+            raise UserNotInSameVC()
     
     async def do_blacklist_check(ctx: commands.Context):
         if ctx.author.id in blacklist:
@@ -40,7 +41,7 @@ class UserChecks:
             )
             # TODO: random footer
             await ctx.reply(embed=embed)
-            raise Exception("user on blacklist")
+            raise UserOnBlacklist()
         
     async def do_bot_in_vc_check(ctx: commands.Context):
         if ctx.voice_client is None:
@@ -57,9 +58,3 @@ class UserChecks:
             #embed.description=ctx.author.voice.channel.mention
             #embed.color=nextcord.Color.green()
             #await msg.edit(embed=embed)
-    
-    async def do_all_checks(ctx: commands.Context):
-        await UserChecks.do_blacklist_check(ctx)
-        await UserChecks.do_vc_check(ctx)
-        await UserChecks.do_bot_in_vc_check(ctx)
-        await UserChecks.do_same_vc_check(ctx)

@@ -16,6 +16,7 @@ intents = nextcord.Intents.all()
 bot = commands.Bot(command_prefix=discord_prefix, intents=intents)
 bot.load_extension("cogs.main")
 bot.load_extension("cogs.media")
+bot.load_extension("cogs.owner")
 
 @bot.event
 async def on_ready():

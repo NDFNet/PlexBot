@@ -1,11 +1,8 @@
 import nextcord
 from nextcord.ext import commands
 
-from PlexBot.config import discord_prefix, discord_token
+from PlexBot.config import discord_prefix, discord_token, VERSION
 from PlexBot.logging import log
-
-# Init
-VERSION = "DEV-0.1.0"
 
 log.info(f"Starting PlexBot {VERSION}")
 

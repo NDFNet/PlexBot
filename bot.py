@@ -1,11 +1,8 @@
 import nextcord
 from nextcord.ext import commands
-from plexapi.audio import Track
-from plexapi.server import PlexServer
 
-from PlexBot.config import config, discord_prefix, discord_token
+from PlexBot.config import discord_prefix, discord_token
 from PlexBot.logging import log
-from PlexBot.plex import plex
 
 # Init
 VERSION = "DEV-0.1.0"

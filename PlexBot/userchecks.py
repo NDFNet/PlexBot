@@ -1,7 +1,9 @@
-from PlexBot.config import blacklist
-from PlexBot.exceptions import UserOnBlacklist, UserNotInSameVC, UserNotInVC
 import nextcord
 from nextcord.ext import commands
+
+from PlexBot.config import blacklist
+from PlexBot.exceptions import UserNotInSameVC, UserNotInVC, UserOnBlacklist
+
 
 class UserChecks:
     def __init__(self):

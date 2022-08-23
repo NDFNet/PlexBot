@@ -1,5 +1,6 @@
 import json
 
+
 with open("config.json") as conf:
     config = json.load(conf)
 discord_token   = config["discord"]["token"]

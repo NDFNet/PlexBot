@@ -1,11 +1,13 @@
 from operator import contains
+
+import nextcord
 from nextcord.ext import commands
-from PlexBot.userchecks import UserChecks
-from PlexBot.plex import plex
 from plexapi.audio import Track
 from PlexBot.logging import log
+from PlexBot.plex import plex
+from PlexBot.userchecks import UserChecks
 from PlexBot.util import format_time
-import nextcord
+
 
 class Media(commands.Cog):
     def __init__(self, bot):

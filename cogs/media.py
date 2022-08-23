@@ -4,6 +4,7 @@ from PlexBot.userchecks import UserChecks
 from PlexBot.plex import plex
 from plexapi.audio import Track
 from PlexBot.logging import log
+from PlexBot.util import format_time
 import nextcord
 
 class Media(commands.Cog):
@@ -25,7 +26,13 @@ class Media(commands.Cog):
         try: track: Track = tracks[0]
         except IndexError: await ctx.reply(f"No results for \"{arg}\""); return
         log.info(f"{ctx.author.name} queued \"{track.title}\"")
-        await ctx.reply(f"Now Playing: {track.title}")
+        embed = nextcord.Embed(
+            title=f"{track.title}",
+            description=f"{track.parentTitle} - {track.grandparentTitle}\n**Length:** {format_time(track.duration)}",
+            color=nextcord.Color.green(),
+        )
+        embed.set_thumbnail(track.thumbUrl)
+        await ctx.reply("**Now Playing**", embed=embed)
         try: vc = await ctx.author.voice.channel.connect()
         except nextcord.ClientException: pass
         vc.play(nextcord.FFmpegOpusAudio(track.getStreamURL()))

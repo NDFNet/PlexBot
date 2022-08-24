@@ -17,7 +17,7 @@ pip install -r requirements.txt
 4. Fill out config.example.json and rename to config.json
 5. Run bot
 ```bash
-python main.py
+python bot.py
 ```
 
 ## Contributing

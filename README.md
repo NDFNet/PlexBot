@@ -1,6 +1,11 @@
 # PlexBot
 A basic bot to play music from the configured Plex server in a Discord voice channel.
 
+## Requirements
+- Python 3.10 or newer
+- Discord Bot
+- Plex Media Server
+
 ## Setup
 1. Clone the repo
 ```bash
